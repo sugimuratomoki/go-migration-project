@@ -40,15 +40,40 @@ transition: slide-left
 
 ![](./images/any.png)
 
+<!--
+コードを追う時、関数の中を見て、フロントのコード見て、実行してみて、やっとわかる
+
+tsconfig.jsonでstrict=trueにすれば解決する
+-->
+
 ---
 transition: slide-left
 ---
 
 # 破壊的な関数
 
-関数内で`param`の値を書き換えており、事故が起こりやすい
+関数内で`param`の値を書き換えており、事故が起こりそう
 
 ![](./images/destructive.png)
+
+<!--
+気を付ければいいって話だが、その脳みそを使うのが疲れるし無駄
+https://github.com/ichiyoshi-i3design/account-api/blob/c56bbe7dc8ae82551d4ff065b15373f6b5296c03/src/service/ReplaceCoreDataService.ts#L42
+-->
+
+---
+transition: slide-left
+---
+
+# テスタビリティが低い
+
+例えば画像のコントローラだと、コントローラーを初期化した時にはもうデータソースが初期化されているのでコントローラーのテストをやろうとした時にDBに繋いでしまう
+
+![](./images/testability.png)
+
+<!--
+https://github.com/ichiyoshi-i3design/account-api/blob/c56bbe7dc8ae82551d4ff065b15373f6b5296c03/src/service/PortalAppHistoryService.ts#L49
+-->
 
 ---
 transition: slide-left
@@ -61,16 +86,6 @@ v18はサポート外 v24かv22に変更した方が良さそう
 ![](./images/nodev18.png)
 
 <img src="./images/schedule.svg" style="height: 250px;">
-
----
-transition: slide-left
----
-
-# テスタビリティが低い
-
-例えば画像のコントローラだと、コントローラーを初期化した時にはもうデータソースが初期化されているのでコントローラーのテストをやろうとした時にDBに繋いでしまう
-
-![](./images/testability.png)
 
 ---
 transition: slide-left
@@ -170,6 +185,13 @@ D -- nestjs --> F[改善案3]
 C -- ✖︎ --> G[改善案4]
 ```
 
+<!--
+方針として
+1. 変更点多すぎるし直すなら結構全部直さなきゃダメだと思うからもう言語変えちゃおう
+2. 流石に変えるのはやめてフレームワーク変えてモダンに開発しよう
+3. フレームワークを変えるのもやめよう
+-->
+
 ---
 transition: slide-left
 ---
@@ -184,6 +206,12 @@ typescriptからGoに置き換える
 - 言語機能の追加にとても慎重で後方置換性が高くGoのバージョンアップで破壊的変更が少ないため長期的に使える(昔のコードが今でも動く)
 - 言語仕様が少ないので学習コストが低い
 - 単一のバイナリにコンパイルされるためDockerのイメージが小さくメモリ使用量も少ない
+
+<!--
+go 1.0のリリースからは10年ぐらい経っている
+少なくともgo1の間は大丈夫って公式サイトに書いてある
+今の最新は1.25
+-->
 
 ---
 transition: slide-left
