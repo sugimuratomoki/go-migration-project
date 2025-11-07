@@ -11,6 +11,16 @@ transition: slide-left
 transition: slide-left
 ---
 
+# アジェンダ
+
+## 1. account-apiのつらいところ
+## 2. 修正方針
+## 3. 修正案1~4
+
+---
+transition: slide-left
+---
+
 # account-apiのつらいところ
 
 - **巨大なAPI** - 一つのAPIで更新処理を全て担当している
