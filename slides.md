@@ -30,6 +30,11 @@ transition: slide-left
 
 ![](./images/updateAccount.png)
 
+<!--
+account-apiのソースコード
+https://github.com/ichiyoshi-i3design/account-api/blob/c56bbe7dc8ae82551d4ff065b15373f6b5296c03/src/controller/AccountController.ts#L272
+-->
+
 ---
 transition: slide-left
 ---
@@ -58,6 +63,7 @@ transition: slide-left
 
 <!--
 気を付ければいいって話だが、その脳みそを使うのが疲れるし無駄
+account-apiのソースコード
 https://github.com/ichiyoshi-i3design/account-api/blob/c56bbe7dc8ae82551d4ff065b15373f6b5296c03/src/service/ReplaceCoreDataService.ts#L42
 -->
 
@@ -72,7 +78,13 @@ transition: slide-left
 ![](./images/testability.png)
 
 <!--
+account-apiのソースコード
 https://github.com/ichiyoshi-i3design/account-api/blob/c56bbe7dc8ae82551d4ff065b15373f6b5296c03/src/service/PortalAppHistoryService.ts#L49
+
+DIすればいい感じになる
+
+DIサンプルコード
+https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgMJwDYIK4bpKZAbwChlzkBBAE2oC5kAKOBkbAWwCNoAaZT1h25QAlMgC8APmRsu0EgF8SJBAHsQAZzDIEmHHgIN0WXPmgTiZCjXpM4fTmKnI4yANT9FytZu1g4GgDWlBaMTtKkFDrqWshQEBq42uI6eqYEAHQ2jACMPABMIlbkPhqqGBAZGKoA5ozxiRhgRUoqMX4BgQBCoQhGaQbQ4ZZRpdoNSRYIWbS5BUWjMeWV1XUTTS0kQA
 -->
 
 ---
@@ -81,11 +93,16 @@ transition: slide-left
 
 # 古いバージョン - node -
 
-v18はサポート外 v24かv22に変更した方が良さそう
+v24かv22に変更した方が良さそう
 
 ![](./images/nodev18.png)
 
 <img src="./images/schedule.svg" style="height: 250px;">
+
+<!--
+nodeのサポート状況
+https://nodejs.org/ja/about/eol#eol%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3
+-->
 
 ---
 transition: slide-left
@@ -167,10 +184,12 @@ app.get('/', (req, res, next) => {
 transition: slide-left
 ---
 
-# 改善案
+# 改善方針/案
+
+ドメイン駆動開発を取り入れて業務プロセスをプログラムで表現する
 
 1. typescript -> Golang
-2. express -> hono
+2. express -> hono,koa,fastify
 3. express -> nestjs
 4. express
 
@@ -186,6 +205,12 @@ C -- ✖︎ --> G[改善案4]
 ```
 
 <!--
+PH4で作成したAPIはドメイン駆動で作成されている
+
+1年前まではexpressではないものって言ったらkoaかfastify
+1年前に10年の沈黙を破ってv5が出た
+今はもうnpm install expressではv5がインストールされる
+
 方針として
 1. 変更点多すぎるし直すなら結構全部直さなきゃダメだと思うからもう言語変えちゃおう
 2. 流石に変えるのはやめてフレームワーク変えてモダンに開発しよう
@@ -205,7 +230,7 @@ typescriptからGoに置き換える
 - Google主導のGoは言語仕様が意図的にシンプルに保たれており誰が書いてもある程度同じ実装になる
 - 言語機能の追加にとても慎重で後方置換性が高くGoのバージョンアップで破壊的変更が少ないため長期的に使える(昔のコードが今でも動く)
 - 言語仕様が少ないので学習コストが低い
-- 単一のバイナリにコンパイルされるためDockerのイメージが小さくメモリ使用量も少ない
+- 単一のバイナリにコンパイルされるためデプロイが容易でDockerのイメージやメモリ使用量が少なくなりやすい
 
 <!--
 go 1.0のリリースからは10年ぐらい経っている
@@ -217,7 +242,7 @@ go 1.0のリリースからは10年ぐらい経っている
 transition: slide-left
 ---
 
-# 改善案2 Express -> Hono
+# 改善案2 Express -> Hono,Koa,Fastify
 
 フレームワークを変える
 
